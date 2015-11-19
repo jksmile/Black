@@ -46,5 +46,18 @@
 
        </bean>
 
+       <mvc:interceptors>
+              <mvc:interceptor>
+                     <mvc:mapping path="/admin/*/*" />
+                     <bean class="com.xjk.project.admin.aspect.LoginInterceptor">
+                            <property name="allowUrls">
+                                   <list>
+                                          <value>/admin/login/index</value>
+                                   </list>
+                            </property>
+
+                     </bean>
+              </mvc:interceptor>
+       </mvc:interceptors>
 
 </beans>

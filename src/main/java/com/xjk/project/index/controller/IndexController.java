@@ -1,5 +1,6 @@
 package com.xjk.project.index.controller;
 
+import com.xjk.project.common.utils.CommonProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class IndexController {
 
 
+    private static final String INDEX_PAGE = CommonProperty.getIntance().getIndexTemplate().getProperty("INDEX_PAGE");
 
 
     @RequestMapping("/index")
@@ -25,7 +27,7 @@ public class IndexController {
 
         System.out.println("OK-------------------------------OK\n");
 
-        return new ModelAndView("Index/index");
+        return new ModelAndView(INDEX_PAGE);
     }
 
 
