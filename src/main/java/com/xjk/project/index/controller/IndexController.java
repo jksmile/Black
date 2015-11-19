@@ -1,4 +1,4 @@
-package com.xjk.project.controller;
+package com.xjk.project.index.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ public class IndexController {
     public Object index (HttpServletRequest request, Model model){
 
 
-        System.out.println("OK-------------------------------\n");
+        System.out.println("OK-------------------------------OK\n");
 
         return new ModelAndView("Index/index");
     }
