@@ -1,0 +1,20 @@
+#+-------------------------------------------------
+#| File Name:  .gitignore
+#+-------------------------------------------------
+#| File Desc:  The ignore files will be writed here
+#+-------------------------------------------------
+#| File Date:  2015/11/15
+#+-------------------------------------------------
+
+
+# Ignore the IDE framework files.
+
+Black.iml
+
+.idea/
+
+# Ignore the class file and jar file.
+
+*.class
+
+*.jar

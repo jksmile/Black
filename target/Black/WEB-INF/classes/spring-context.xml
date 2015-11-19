@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+       <!-- 将XML加载的bean 注入到被注解的类中. -->
+       <!--<context:annotation-config />-->
+
+       <!-- 在相关包下面加载被注解的类， -->
+       <!--<context:component-scan base-package="com.xjk.project" />-->
+
+       <!-- 加载properties文件，可以便捷的在XML文件中使用，如 ${jdbc.username}形式 -->
+       <context:property-placeholder location="classpath*:*.properties"/>
+
+
+
+
+
+</beans>
