@@ -13,7 +13,10 @@ Black.iml
 
 .idea/
 
+
 # Ignore the class file and jar file.
+
+target/
 
 *.class
 
