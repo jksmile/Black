@@ -40,7 +40,7 @@
 
     <div id="login">
 
-        <form action="/admin/login/index" method="post">
+        <form action="${loginAction}" method="post">
 
             USER:<input id="login_user" type="text" name="${loginName}" />
 

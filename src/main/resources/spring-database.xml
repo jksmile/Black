@@ -7,23 +7,25 @@
 
        <context:property-placeholder location="classpath:jdbc.properties" />
 
-       <bean id="dataSourceMysql" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
-              <property name="driver" value="${jdbc.driverClassName}"/>
-              <property name="url" value="${jdbc.url}"/>
-              <property name="username" value="${jdbc.username}"/>
-              <property name="password" value="${jdbc.password}"/>
+       <bean id="dataSourceMysql" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+              <property name="driverClass" value="${black.jdbc.driver}"/>
+              <property name="jdbcUrl" value="${black.jdbc.url}" />
+              <property name="user" value="${black.jdbc.username}" />
+              <property name="password" value="${black.jdbc.password}" />
               <property name="loginTimeout" value="5" />
+              <property name="maxPoolSize" value="200" />
+              <property name="initialPoolSize" value="10" />
        </bean>
 
+
        <bean id="sqlSessionFactory" name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-              <!--<property name="configLocation" value="classpath:mybatis/mybatis-config-mysql.xml"/>-->
               <property name="dataSource" ref="dataSourceMysql"/>
               <property name="mapperLocations" value="classpath:mapper/*.xml"/>
        </bean>
 
 
        <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-              <property name="basePackage" value="com.xjk.project.common.dao/**/*"/>
+              <property name="basePackage" value="com.xjk.project.common.dao"/>
               <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
        </bean>
 

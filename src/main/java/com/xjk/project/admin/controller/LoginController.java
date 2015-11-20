@@ -55,6 +55,8 @@ public class LoginController {
 
         model.addAttribute("loginPass",SessionConstant.SESSION_USER_PASS);
 
+        model.addAttribute("loginAction",UrlConstant.ADMIN_LOGIN_URL);
+
         return new ModelAndView(LOGIN_PAGE);
     }
 

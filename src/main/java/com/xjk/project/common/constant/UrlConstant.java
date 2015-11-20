@@ -9,7 +9,8 @@ public class UrlConstant {
 
     public static final String ADMIN_LOGIN_URL = "/admin/login/index";
 
-    public static final String ADMIN_INDEX_URL = "/admin/index/index";
+    public static final String ADMIN_INDEX_URL = "/admin/admin/index";
+
 
 
 
