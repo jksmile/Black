@@ -1,6 +1,8 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+##    <script type="text/javascript" src="/static/js/common/jquery.min.js" />
+
     <title>Welcome To Login My Home</title>
 
     <style type="text/css">
@@ -22,9 +24,35 @@
         #login_button{width:70px; height:30px; font-size:15px;}
 
 
-
     </style>
 
+##
+##    <script>
+##
+##        $(document).ready(function () {
+##
+##            $("input").each(function(){
+##
+##                $(this).mouseover(function(){
+##
+##                    $(this).css({"border-width":"1px","border-color":"black","backgroundColor":"white"});
+##                })
+##
+##
+##                $(this).onmouseout(function(){
+##                    $(this).css({"border-width":"1px","border-color":"black","backgroundColor":"gray"});
+##
+##                })
+##
+##
+##            })
+##
+##
+##
+##        })
+##
+##
+##    </script>
 
 </head>
 
@@ -56,9 +84,6 @@
     </div>
 
 </div>
-
-
-
 
 </body>
 </html>

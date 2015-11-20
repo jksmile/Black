@@ -11,6 +11,11 @@
        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
 
+       <mvc:default-servlet-handler />
+
+       <!-- 处理静态资源 -->
+       <mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
+
 
        <!-- 将XML加载的bean 注入到被注解的类中. -->
        <context:annotation-config />
@@ -20,10 +25,6 @@
 
        <mvc:annotation-driven/>
 
-       <mvc:default-servlet-handler />
-
-       <!-- 处理静态资源 -->
-       <mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
 
 
        <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
