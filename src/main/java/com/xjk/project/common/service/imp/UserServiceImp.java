@@ -34,7 +34,7 @@ public class UserServiceImp implements UserService {
 
         UserModel userInfo = userDao.getUserInfoById(userId);
 
-            if(userInfo.getUserPass().equals(MD5Util.getPassMD5(oldPwd))){
+            if(userInfo.getUserPass().equalsIgnoreCase(MD5Util.getPassMD5(oldPwd))){
 
                 return userDao.updatePassById(userId,MD5Util.getPassMD5(newPwd));
             }else{
