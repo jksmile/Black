@@ -1,4 +1,11 @@
-<div style="color:grey; font-size: 25px; text-align: center; margin-top:200px;">
 
-    admin/index
-</div>
+<html>
+
+<frameset cols="20%,*" border="1" noresize="noresize">
+
+    <frame src="/admin/admin/menu" name="leftFrame" target="rightFrame">
+    <frame src="/admin/admin/welcome" name="rightFrame">
+
+</frameset>
+
+</html>

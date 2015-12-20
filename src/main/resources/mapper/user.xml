@@ -3,7 +3,7 @@
 <mapper namespace="com.xjk.project.common.dao.UserDao">
 
     <sql id="Base_Column_List">
-        id,
+        id as userId,
         userName,
         userPass
     </sql>
@@ -11,8 +11,22 @@
     <select id="checkLogin" resultType="com.xjk.project.common.model.UserModel">
         select
         <include refid="Base_Column_List"/>
-        from nightsky_wx.admin_user
+        from admin_user
         where userName=#{userName} and userPass=#{userPass}
     </select>
 
+
+    <select id="getUserInfoById" resultType="com.xjk.project.common.model.UserModel">
+
+        select
+        <include refid="Base_Column_List" />
+        from admin_user
+        where id=#{id}
+    </select>
+
+
+    <update id="updatePassById" >
+
+        UPDATE admin_user SET userPass = #{userPass} WHERE id = #{id}
+    </update>
 </mapper>

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,8 +45,10 @@ public class LoginController {
 
             if (null != userInfo && !userInfo.getUserName().isEmpty()) {
 
-                request.getSession().setAttribute(SessionConstant.SESSION_USER_NAME,request.getParameter(SessionConstant.SESSION_USER_NAME));
+                request.getSession().setAttribute(SessionConstant.SESSION_USER_NAME,userInfo.getUserName());
 
+                request.getSession().setAttribute(SessionConstant.SESSION_USER_ID,userInfo.getUserId());
+                
                 return "redirect:"+ UrlConstant.ADMIN_INDEX_URL;
             }
 
@@ -60,6 +63,18 @@ public class LoginController {
         return new ModelAndView(LOGIN_PAGE);
     }
 
+
+
+    @RequestMapping("/loginout")
+    @ResponseBody
+    public String loginOut(HttpServletRequest request, Model model){
+
+        request.getSession().setAttribute(SessionConstant.SESSION_USER_NAME, null);
+
+        request.getSession().setAttribute(SessionConstant.SESSION_USER_ID,null);
+
+        return "1";
+    }
 
 
 

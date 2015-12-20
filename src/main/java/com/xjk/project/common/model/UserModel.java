@@ -10,9 +10,19 @@ package com.xjk.project.common.model;
 
 public class UserModel {
 
+	private int userId;
+
 	private String userName;
 
-	private String passWord;
+	private String userPass;
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public String getUserName() {
 		return userName;
@@ -22,19 +32,22 @@ public class UserModel {
 		this.userName = userName;
 	}
 
-	public String getPassWord() {
-		return passWord;
+	public String getUserPass() {
+		return userPass;
 	}
 
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+
+	public void setUserPass(String userPass) {
+		this.userPass = userPass;
 	}
 
 	@Override
 	public String toString() {
 		return "UserModel{" +
-				"userName='" + userName + '\'' +
-				", passWord='" + passWord + '\'' +
+				"userId=" + userId +
+				", userName='" + userName + '\'' +
+				", userPass='" + userPass + '\'' +
 				'}';
 	}
+
 }

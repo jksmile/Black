@@ -11,10 +11,11 @@
        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
 
-       <mvc:default-servlet-handler />
+       <mvc:annotation-driven/>
 
        <!-- 处理静态资源 -->
-       <mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
+       <!--<mvc:resources location="/WEB-INF/static/" mapping="/static/**"/>-->
+       <mvc:default-servlet-handler/>
 
 
        <!-- 将XML加载的bean 注入到被注解的类中. -->
@@ -22,9 +23,6 @@
 
        <!-- 在相关包下面加载被注解的类， -->
        <context:component-scan base-package="com.xjk.project" />
-
-       <mvc:annotation-driven/>
-
 
 
        <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">

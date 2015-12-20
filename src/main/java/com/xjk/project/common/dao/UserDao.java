@@ -17,5 +17,10 @@ public interface UserDao {
     UserModel checkLogin(@Param("userName") String userName, @Param("userPass") String userPass);
 
 
+    UserModel getUserInfoById(@Param("id") int id);
+
+
+    Boolean  updatePassById(@Param("id") int id, @Param("userPass") String userPass);
+
 }
 

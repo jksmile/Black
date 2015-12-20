@@ -8,6 +8,8 @@ package com.xjk.project.admin.constant;
 public class SessionConstant {
 
 
+    public static final String SESSION_USER_ID = "userId";
+
 
     public static final String SESSION_USER_NAME = "userName";
 

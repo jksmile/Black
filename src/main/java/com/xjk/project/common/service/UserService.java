@@ -13,4 +13,8 @@ public interface UserService {
 
 
     UserModel checkLogin(String userName,String userPass);
+
+
+    Boolean updatePwd(int userId, String oldPwd, String newPwd);
+
 }
