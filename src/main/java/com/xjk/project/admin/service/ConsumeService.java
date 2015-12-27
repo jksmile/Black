@@ -1,6 +1,8 @@
 package com.xjk.project.admin.service;
 
+import com.xjk.project.admin.model.ConsumeTypeModel;
 import com.xjk.project.admin.model.ConsumeTypeResult;
+import com.xjk.project.admin.model.ConsumerModel;
 
 import java.util.ArrayList;
 
@@ -14,5 +16,10 @@ public interface ConsumeService {
 
     ArrayList<ConsumeTypeResult> getConsumeTypeList();
 
+    ArrayList<ConsumeTypeModel> getConsumeTypeByPid(Integer pid);
+
+    Boolean delConsumeType(Integer consumeTypeId);
+
+    ArrayList<ConsumerModel> getAllConsumer();
 
 }

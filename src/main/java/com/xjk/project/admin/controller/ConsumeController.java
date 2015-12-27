@@ -1,5 +1,6 @@
 package com.xjk.project.admin.controller;
 
+import com.xjk.project.admin.model.ConsumeTypeModel;
 import com.xjk.project.admin.model.ConsumeTypeResult;
 import com.xjk.project.admin.service.ConsumeService;
 import com.xjk.project.common.utils.CommonProperty;
@@ -7,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Verfion:
@@ -44,11 +47,28 @@ public class ConsumeController {
 
         Integer consumeTypeId = Integer.parseInt(request.getParameter("consumeTypeId"));
 
+        Boolean result = consumeService.delConsumeType(consumeTypeId);
 
+        if(result){
 
-        return "";
+            return "1";
+        }else{
+
+            return "0";
+        }
     }
 
+    @RequestMapping("/getConsumeTypeByPid")
+    @ResponseBody
+    public List<ConsumeTypeModel> getConsumeTypeByPid(HttpServletRequest request){
+
+        Integer pid = Integer.parseInt(request.getParameter("pid"));
+
+        ArrayList<ConsumeTypeModel> consumeTypeModelList = consumeService.getConsumeTypeByPid(pid);
+
+
+        return consumeTypeModelList;
+    }
 
 
 

@@ -42,9 +42,9 @@
 
     #content { float:left; width:100%;}
 
-    #title { border-bottom:1px solid grey;  line-height:50px; height:50px; width:100%; float:left; margin-top:20px;  }
+    #title { border-bottom:1px solid grey;  line-height:50px; height:45px; width:100%; float:left;}
 
-    #defaultCenter { height:50px; float:left; margin-left:20px; cursor:pointer; }
+    #defaultCenter { height:45px; float:left; margin-left:20px; cursor:pointer; }
 
     #title  span {font-size:35px; margin-left:10px;}
 

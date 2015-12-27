@@ -1,8 +1,10 @@
 package com.xjk.project.admin.service.imp;
 
 import com.xjk.project.admin.dao.ConsumeTypeDao;
+import com.xjk.project.admin.dao.ConsumerDao;
 import com.xjk.project.admin.model.ConsumeTypeModel;
 import com.xjk.project.admin.model.ConsumeTypeResult;
+import com.xjk.project.admin.model.ConsumerModel;
 import com.xjk.project.admin.service.ConsumeService;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ public class ConsumeImpService implements ConsumeService {
     @Resource
     private ConsumeTypeDao consumeTypeDao;
 
+    @Resource
+    private ConsumerDao consumerDao;
 
     public ArrayList<ConsumeTypeResult> getConsumeTypeList() {
 
@@ -92,13 +96,35 @@ public class ConsumeImpService implements ConsumeService {
     }
 
 
+    @Override
+    public ArrayList<ConsumeTypeModel> getConsumeTypeByPid(Integer pid) {
 
+        ArrayList<ConsumeTypeModel> consumeTypeList = consumeTypeDao.selectAllType();
+
+        ArrayList<ConsumeTypeModel> result = new ArrayList<ConsumeTypeModel>();
+
+        for(ConsumeTypeModel consumeTypeModel : consumeTypeList){
+
+            if(consumeTypeModel.getConsumeTypePid() == pid){
+
+                result.add(consumeTypeModel);
+            }
+        }
+
+        return result;
+    }
+
+    @Override
     public Boolean delConsumeType(Integer consumeTypeId){
 
+        return consumeTypeDao.delConsumeType(consumeTypeId);
 
-
-        return true;
     }
 
 
+    @Override
+    public ArrayList<ConsumerModel> getAllConsumer() {
+
+        return consumerDao.selectAllConsumer();
+    }
 }

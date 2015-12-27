@@ -107,7 +107,7 @@
 
                             if(data){
 
-                                $(this).parents("div").parent("li").remove();
+                                $("#consumeType-"+actionArr[1]).remove();
                             }else{
 
                                 alert("删除失败！");
@@ -133,7 +133,7 @@
 
         .setting {
             width: 100%;
-            margin-top: 50px;
+            margin-top: 52px;
         }
 
         .settingTitle {
@@ -224,14 +224,14 @@
 
         #foreach($first in $consumeTypeList)
         <ul>
-            <li>
+            <li id="consumeType-${first.getConsumeTypeModel().getConsumeTypeId()}">
 
                 <div class="consumeName">
                     -<span class="consumeName_first_span">${first.getConsumeTypeModel().getConsumeTypeName()}</span>
                     <span class="action">
-                        <span class="actionDetail" name="add" id="add-${first.getConsumeTypeModel().getConsumeTypeId()}">添加</span>|
-                        <span class="actionDetail" name="update" id="update-${first.getConsumeTypeModel().getConsumeTypeId()}">修改</span>|
-                        <span class="actionDetail" name="del" id="del-${first.getConsumeTypeModel().getConsumeTypeId()}">删除</span>
+                        <span class="actionDetail" name="add-${first.getConsumeTypeModel().getConsumeTypeId()}">添加</span>|
+                        <span class="actionDetail" name="update-${first.getConsumeTypeModel().getConsumeTypeId()}">修改</span>|
+                        <span class="actionDetail" name="del-${first.getConsumeTypeModel().getConsumeTypeId()}">删除</span>
                     </span>
                 </div>
 
@@ -239,25 +239,25 @@
                 #foreach($second in $first.getConsumeTypeResultList())
 
 
-                    <li>
+                    <li id="consumeType-${second.getConsumeTypeModel().getConsumeTypeId()}">
                         <div class="consumeName">
                             --<span class="consumeName_first_span" >${second.getConsumeTypeModel().getConsumeTypeName()}</span>
                             <span class="action">
-                                <span class="actionDetail" name="add">添加</span>|
-                                <span class="actionDetail" name="update">修改</span>|
-                                <span class="actionDetail" name="del">删除</span>
+                                <span class="actionDetail" name="add-${second.getConsumeTypeModel().getConsumeTypeId()}">添加</span>|
+                                <span class="actionDetail" name="update-${second.getConsumeTypeModel().getConsumeTypeId()}">修改</span>|
+                                <span class="actionDetail" name="del-${second.getConsumeTypeModel().getConsumeTypeId()}">删除</span>
                             </span>
                         </div>
 
                         <ul>
                         #foreach($third in $second.getConsumeTypeResultList())
 
-                            <li>
+                            <li id="consumeType-${third.getConsumeTypeModel().getConsumeTypeId()}">
                                 <div class="consumeName">
                                     ---<span class="consumeName_first_span" >${third.getConsumeTypeModel().getConsumeTypeName()}</span>
                                         <span class="action">
-                                            <span class="actionDetail" name="update">修改</span>|
-                                            <span class="actionDetail" name="del-${third.getConsumeTypeModel().getConsumeTypeName()}">删除</span>
+                                            <span class="actionDetail" name="update-${third.getConsumeTypeModel().getConsumeTypeId()}">修改</span>|
+                                            <span class="actionDetail" name="del-${third.getConsumeTypeModel().getConsumeTypeId()}">删除</span>
                                         </span>
                                 </div>
                             </li>

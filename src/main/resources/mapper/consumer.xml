@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjk.project.admin.dao.ConsumerDao">
+
+    <sql id="Base_Column_List">
+        id as consumerId,
+        pid as consumerPid,
+        name as consumerName
+    </sql>
+
+    <select id="selectAllConsumer" resultType="com.xjk.project.admin.model.ConsumerModel">
+        select
+        <include refid="Base_Column_List"/>
+        from admin_consumer
+    </select>
+
+
+
+</mapper>
