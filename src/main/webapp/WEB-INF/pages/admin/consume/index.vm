@@ -1,0 +1,288 @@
+<html>
+<head>
+    <title></title>
+    <script src="/static/js/common/jquery.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $(".item").click(function () {
+
+                $(".item").each(function (i) {
+
+                    $(this).removeClass("defineItem");
+
+                });
+
+                $(this).addClass("defineItem");
+
+                $(".tabContent").each(function (i) {
+
+                    $(this).css("display", "none");
+                });
+
+                var idName = $(this).attr("name");
+
+                $("#" + idName).css("display", "block");
+
+            });
+
+
+            $(".consumeName").mouseover(function () {
+
+                $(".consumeName").each(function (i) {
+
+                    $(this).children("span:first").removeClass("spanMouseOver");
+                });
+
+                $(this).children("span:first").addClass("spanMouseOver");
+
+                $(this).children("span:eq(1)").css("display", "inline");
+
+            });
+
+
+            $(".consumeName").mouseout(function () {
+
+                $(".consumeName").each(function (i) {
+
+                    $(this).children("span:first").removeClass("spanMouseOver");
+
+                    $(this).children("span:eq(1)").css("display", "none");
+                });
+
+            });
+
+
+            $(".consumeName_first_span").click(function () {
+
+                var val = $(this).parent("div").next("ul").css("display");
+
+                if (val == "block") {
+
+                    $(this).parent("div").next().css("display", "none");
+                } else {
+
+                    $(this).parent("div").next().css("display", "block");
+                }
+
+
+            });
+
+
+            $(".actionDetail").mouseover(function(){
+
+                $(".actionDetailMouseover").each(function(){
+
+                    $(this).removeClass("actionDetailMouseover");
+                });
+
+                $(this).addClass("actionDetailMouseover");
+
+            });
+
+
+            $(".actionDetail").click(function(){
+
+                var actionArr = $(this).attr("name").split("-");
+
+
+                if(actionArr[0] == "add"){
+
+
+                }else if(actionArr[0] == "update"){
+
+
+                }else if(actionArr[0] == "del"){
+
+                    var elementExist = $(this).parents("div").next("ul").children("li").length>0;
+
+                    if(elementExist){
+
+                        alert("删除失败！");
+                    }else{
+
+                        $.post("/admin/consume/delConsumeType",{"consumeTypeId":actionArr[1]},function(data){
+
+                            if(data){
+
+                                $(this).parents("div").parent("li").remove();
+                            }else{
+
+                                alert("删除失败！");
+                            }
+
+                        })
+
+                    }
+
+                }else{
+
+                    alert("参数错误！");
+                }
+
+            });
+
+        });
+
+
+    </script>
+
+    <style type="text/css">
+
+        .setting {
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .settingTitle {
+            width: 100%;
+            border-bottom: 1px solid grey;
+        }
+
+        .item {
+            width: auto;
+            padding: 5px;
+            float: left;
+            margin-left: 10px;
+            border: 1px solid grey;
+            cursor: pointer;
+        }
+
+        .defineItem {
+            background: green;
+            color: white;
+        }
+
+        .tabContent {
+            margin-left: 100px;
+            margin-top: 100px;
+            width: 100%;
+        }
+
+        #consumeType {
+        }
+
+        #consumer {
+            background: blue;
+            height: 200px;
+            display: none;
+        }
+
+        li {
+            margin-top: 15px;
+            cursor: pointer;
+            list-style-type: none;
+            border-left: 1px solid blue;
+        }
+
+        .consumeName {
+            border-left: 1px solid blue;
+            display: inline;
+        }
+
+        .spanMouseOver {
+            background: blue;
+            color: white;
+            padding: 5px;
+        }
+
+        .action {
+            display: none;
+            margin-left: 20px;
+            border: 1px solid grey;
+            background: green;
+            color: white;
+            padding: 5px;
+            width: 10px;
+            overflow: hidden;
+        }
+
+        .actionDetailMouseover{
+            color:yellow;
+            font-size: 17px;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="setting">
+
+    <div class="settingTitle">
+        <div class="item defineItem" name="consumeType">消费类型</div>
+        <div class="item" name="consumer">消费人员</div>
+    </div>
+
+
+    <div class="tabContent" id="consumeType">
+
+
+        #foreach($first in $consumeTypeList)
+        <ul>
+            <li>
+
+                <div class="consumeName">
+                    -<span class="consumeName_first_span">${first.getConsumeTypeModel().getConsumeTypeName()}</span>
+                    <span class="action">
+                        <span class="actionDetail" name="add" id="add-${first.getConsumeTypeModel().getConsumeTypeId()}">添加</span>|
+                        <span class="actionDetail" name="update" id="update-${first.getConsumeTypeModel().getConsumeTypeId()}">修改</span>|
+                        <span class="actionDetail" name="del" id="del-${first.getConsumeTypeModel().getConsumeTypeId()}">删除</span>
+                    </span>
+                </div>
+
+                <ul>
+                #foreach($second in $first.getConsumeTypeResultList())
+
+
+                    <li>
+                        <div class="consumeName">
+                            --<span class="consumeName_first_span" >${second.getConsumeTypeModel().getConsumeTypeName()}</span>
+                            <span class="action">
+                                <span class="actionDetail" name="add">添加</span>|
+                                <span class="actionDetail" name="update">修改</span>|
+                                <span class="actionDetail" name="del">删除</span>
+                            </span>
+                        </div>
+
+                        <ul>
+                        #foreach($third in $second.getConsumeTypeResultList())
+
+                            <li>
+                                <div class="consumeName">
+                                    ---<span class="consumeName_first_span" >${third.getConsumeTypeModel().getConsumeTypeName()}</span>
+                                        <span class="action">
+                                            <span class="actionDetail" name="update">修改</span>|
+                                            <span class="actionDetail" name="del-${third.getConsumeTypeModel().getConsumeTypeName()}">删除</span>
+                                        </span>
+                                </div>
+                            </li>
+                        #end
+                        </ul>
+
+                    </li>
+
+                #end
+                </ul>
+
+            </li>
+        </ul>
+        #end
+
+    </div>
+
+    <div class="tabContent" id="consumer">
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
+
