@@ -37,7 +37,7 @@
 
     <style type="text/css">
 
-        #container{border: 1px solid grey; margin-left: 150px;}
+        #container{ margin-left: 150px;}
 
         #list li{margin-top: 20px; list-style-type: none;}
 

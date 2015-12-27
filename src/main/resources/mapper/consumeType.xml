@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjk.project.admin.dao.ConsumeTypeDao">
+
+    <sql id="Base_Column_List">
+        id as consumeTypeId,
+        pid as consumeTypePid,
+        name as consumeTypeName
+    </sql>
+
+    <select id="selectAllType" resultType="com.xjk.project.admin.model.ConsumeTypeModel">
+        select
+        <include refid="Base_Column_List"/>
+        from admin_consume_type
+        where status = 0
+    </select>
+
+    <delete id="delConsumeType">
+
+        UPDATE admin_consume_type SET status = 1 where id = #{id}
+    </delete>
+
+</mapper>
