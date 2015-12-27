@@ -39,11 +39,15 @@
 
             $(".selectOption").live("change", function () {
 
+                $(this).nextAll(".selectOption").remove();
+
                 var selectOptionVal = $(this).val();
 
                 if (!isNaN(selectOptionVal)) {
 
                     $.post("/admin/consume/getConsumeTypeByPid", {"pid": selectOptionVal}, function (data) {
+
+                        if(data.length>0){
 
                         var select = '<select class="input selectOption">';
 
@@ -53,7 +57,7 @@
                         select += '</select>';
 
                         $("#consumeType").append(select);
-
+                        }
                     })
                 }
 
@@ -203,9 +207,9 @@
 
             <li id="consumeType">所属类型：
 
-
                 <select class="input selectOption">
                     <option value="">--请选择--</option>
+
                     #foreach($consumeType in $consumeTypeList)
                         <option value="${consumeType.getConsumeTypeId()}">${consumeType.getConsumeTypeName()}</option>
                     #end
@@ -216,7 +220,6 @@
 
 
             <li>消费日期：
-
                 <input type="text" value="" class="form_datetime" id="dateTime" readonly="readonly"
                        style="width: 180px; height: 30px; font-size: large; background: white; margin-left: 15px; border: 1px solid grey; cursor:pointer;">
             </li>
