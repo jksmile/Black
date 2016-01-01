@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjk.project.admin.dao.BillDao">
+
+    <sql id="Base_Column_List">
+        id,
+        consumerId,
+        consumeTypeId,
+        amount,
+        consumeDate,
+        uid,
+        addtime
+    </sql>
+
+    <insert id="addBill" parameterType="com.xjk.project.admin.model.BillModel">
+        INSERT INTO admin_bill(consumerId,consumeTypeId,amount,consumeDate,uid)
+        VALUES (#{consumerId},#{consumeTypeId},#{amount},#{consumeDate},#{uid})
+    </insert>
+
+</mapper>
