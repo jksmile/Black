@@ -13,8 +13,8 @@
     </sql>
 
     <insert id="addBill" parameterType="com.xjk.project.admin.model.BillModel">
-        INSERT INTO admin_bill(consumerId,consumeTypeId,amount,consumeDate,uid)
-        VALUES (#{consumerId},#{consumeTypeId},#{amount},#{consumeDate},#{uid})
+        INSERT INTO admin_bill(consumerId,consumeTypeId,amount,consumeDate,uid,todo)
+        VALUES (#{consumerId},#{consumeTypeId},#{amount},#{consumeDate},#{uid},#{todo})
     </insert>
 
 </mapper>

@@ -16,6 +16,8 @@ public class BillModel {
 
     private int uid;
 
+    private String todo;
+
     public int getConsumerId() {
         return consumerId;
     }
@@ -56,6 +58,13 @@ public class BillModel {
         this.uid = uid;
     }
 
+    public String getTodo() {
+        return todo;
+    }
+
+    public void setTodo(String todo) {
+        this.todo = todo;
+    }
 
     @Override
     public String toString() {
@@ -65,6 +74,7 @@ public class BillModel {
                 ", amount=" + amount +
                 ", consumeDate='" + consumeDate + '\'' +
                 ", uid=" + uid +
+                ", todo='" + todo + '\'' +
                 '}';
     }
 }

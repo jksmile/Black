@@ -161,7 +161,9 @@
 
                 var dateTime = $("#dateTime").val();
 
-                $.post("/admin/bill/add",{"amount":money,"consumeTypeId":consumeTypeId,"consumerId":consumerId,"consumeDate":dateTime},function(data){
+                var todo=$("#todo").val();
+
+                $.post("/admin/bill/add",{"amount":money,"consumeTypeId":consumeTypeId,"consumerId":consumerId,"consumeDate":dateTime,"todo":todo},function(data){
 
                     if(data==1){
 
@@ -267,6 +269,11 @@
         .field{
             font-size: 18px;
         }
+
+        #todo {
+            margin-left:15px;
+            width:180px;
+        }
     </style>
 
 </head>
@@ -325,6 +332,11 @@
                 <span class="field">消费日期：</span>
                 <input type="text" value="" class="form_datetime" id="dateTime" readonly="readonly"
                        style="width: 180px; height: 30px; font-size: large; background: white; margin-left: 15px; border: 1px solid grey; cursor:pointer;">
+            </li>
+
+            <li>
+                <span class="field">备注说明：</span>
+                <textarea id="todo"></textarea>
             </li>
         </ul>
 
