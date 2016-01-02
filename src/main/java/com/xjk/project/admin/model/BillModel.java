@@ -16,6 +16,8 @@ public class BillModel {
 
     private int uid;
 
+    private int type;
+
     private String todo;
 
     public int getConsumerId() {
@@ -66,6 +68,14 @@ public class BillModel {
         this.todo = todo;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "BillModel{" +
@@ -74,6 +84,7 @@ public class BillModel {
                 ", amount=" + amount +
                 ", consumeDate='" + consumeDate + '\'' +
                 ", uid=" + uid +
+                ", type=" + type +
                 ", todo='" + todo + '\'' +
                 '}';
     }

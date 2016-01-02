@@ -37,6 +37,7 @@
             });
 
 
+            //消费人
             $("#consumer").change(function(){
 
                 var consumer = $(this).val();
@@ -52,40 +53,47 @@
             });
 
 
-            $(".consumeTypeSelectOption").live("change", function () {
+            $(".typeSelect").live("change", function () {
 
-                $(this).nextAll(".consumeTypeSelectOption").remove();
+                $(this).nextAll(".typeSelect").remove();
 
                 var selectOptionVal = $(this).val();
 
+                var idName = $(this).parents(".tabContent").attr("id");
+
                 if (!isNaN(selectOptionVal)) {
 
-                    $("#consumeTypeMesg").html("");
+                    $("#"+idName+"TypeMesg").html("");
+
+                    var subClassName = $(this).attr("name");
 
                     $.post("/admin/consume/getConsumeTypeByPid", {"pid": selectOptionVal}, function (data) {
 
                         if(data.length>0){
 
-                        var select = '<select class="input consumeTypeSelectOption">';
+                        var select = '<select class="input typeSelect '+subClassName+'" name="'+subClassName+'">';
 
                         for (var i = 0; i < data.length; i++) {
                             select += '<option value="' + data[i].consumeTypeId + '">' + data[i].consumeTypeName + '</option>';
                         }
                         select += '</select>';
 
-                        $("#consumeTypeArea").append(select);
+                        $("#"+idName+"TypeArea").append(select);
                         }
                     })
                 }else{
 
-                    $("#consumeTypeMesg").html("请选择消费类别！");
+                    $("#"+idName+"TypeMesg").html("请选择消费类别！");
                 }
 
             });
 
 
             //默认当前时间
-            $("#dateTime").val(getNowFormatDate());
+            $(".form_datetime").each(function(){
+
+                $(this).val(getNowFormatDate())
+            });
 
             function getNowFormatDate() {
                 var date = new Date();
@@ -106,64 +114,67 @@
 
 
             //提交操作
-            $("#submit").mouseover(function(){
+            $(".submit").mouseover(function(){
 
                 $(this).css("font-size","16px");
 
             });
 
-            $("#submit").mouseout(function(){
+            $(".submit").mouseout(function(){
 
                 $(this).css("font-size","14px");
 
             });
 
 
-            $("#submit").click(function(){
+            $(".submit").click(function(){
 
-                var money = $("#money").val();
+                var idName = $(this).parent().attr("id");
 
-                if(money == "" || isNaN(money)){
+                var amount = verifyAmount(idName);
 
-                    $("#moneyMesg").html("请填写合法金额！");
+                var type = 0;
+                if(!amount){
 
-                    return;
+                    return false;
                 }else{
 
-                    $("#moneyMesg").html("");
+                    switch (idName){
+
+                        case "pay":
+
+                            amount = -amount;
+                            break;
+
+                        case "income":
+
+                            type = 1;
+                            break;
+                    }
                 }
 
-                var consumerId = $("#consumer").val();
+                var consumerId = verifyPeople(idName);
 
-                if(consumerId == "" || isNaN(consumerId)){
+                if(!consumerId){
 
-                    $("#consumerMesg").html("请选择消费人！");
-
-                    return;
-                }else{
-
-                    $("#consumerMesg").html("");
+                    return false;
                 }
 
-                var consumeTypeId = $("#consumeType").val();
+                var consumeTypeId = verifyType(idName);
 
-                if(consumeTypeId == "" || isNaN(consumeTypeId)){
+                if(!consumeTypeId){
 
-                    $("#consumeTypeMesg").html("请选择消费类别！");
-
-                    return;
-                }else{
-
-                    $("#consumeTypeMesg").html("");
-
-                    consumeTypeId = $(".consumeTypeSelectOption:last").val();
+                    return false;
                 }
 
-                var dateTime = $("#dateTime").val();
 
-                var todo=$("#todo").val();
+                var dateTime = $("#"+idName+"DateTime").val();
 
-                $.post("/admin/bill/add",{"amount":money,"consumeTypeId":consumeTypeId,"consumerId":consumerId,"consumeDate":dateTime,"todo":todo},function(data){
+                var todo=$("#"+idName+"Todo").val();
+
+                alert(amount+"-"+consumeTypeId+"-"+consumerId+"-"+dateTime+"-"+todo+"-"+type);
+
+                $.post("/admin/bill/add",{"amount":amount,"consumeTypeId":consumeTypeId,"consumerId":consumerId,"consumeDate":dateTime,"todo":todo,"type":type},function(data){
 
                     if(data==1){
 
@@ -175,7 +186,64 @@
 
                 });
 
+
             });
+
+
+            function verifyAmount(idName){
+
+                var money = $("#"+idName+"Money").val();
+
+                if(money == "" || isNaN(money)){
+
+                    $("#"+idName+"MoneyMesg").html("请填写合法金额！");
+
+                    return false;
+                }else{
+
+                    $("#"+idName+"MoneyMesg").html("");
+
+                    return money;
+                }
+            }
+
+            function verifyPeople(idName){
+
+                var people = $("#"+idName+"People").val();
+
+                if(people == "" || isNaN(people)){
+
+                    $("#"+idName+"PeopleMesg").html("请选择消费人！");
+
+                    return false;
+                }else{
+
+                    $("#"+idName+"PeopleMesg").html("");
+
+                    return people;
+                }
+            }
+
+
+            function verifyType(idName){
+
+                var type = $("#"+idName+"Type").val();
+
+                if(type == "" || isNaN(type)){
+
+                    $("#"+idName+"TypeMesg").html("请选择消费类别！");
+
+                    return false;
+                }else{
+
+                    $("#"+idName+"TypeMesg").html("");
+
+                    type = $("."+idName+"TypeSelect:last").val();
+
+                    return type;
+                }
+
+            }
 
         });
 
@@ -222,23 +290,22 @@
             display: none;
         }
 
-        #list li {
+        #income {
+            display: none;
+        }
+
+        .list li {
             margin-top: 20px;
             list-style-type: none;
         }
 
-        #money {
-
+        #payMoney,#incomeMoney{
             width: 180px;
             height: 30px;
             font-size: large;
             background: white;
             margin-left: 15px;
             border: 1px solid grey;
-        }
-
-        #date {
-            margin-left: 15px;
         }
 
         .input {
@@ -250,7 +317,7 @@
             border: 1px solid grey;
         }
 
-        #submit {
+        .submit {
             color: white;
             width: 100px;
             cursor: pointer;
@@ -270,9 +337,10 @@
             font-size: 18px;
         }
 
-        #todo {
+        .todo {
             margin-left:15px;
             width:180px;
+            border:1px solid grey;
         }
     </style>
 
@@ -283,25 +351,25 @@
 <div id="container">
 
     <div class="settingTitle">
-        <div class="item defineItem" name="recordBill">记一笔</div>
+        <div class="item defineItem" name="pay">支 出</div>
+        <div class="item" name="income">收 入</div>
         <div class="item" name="billList">账单列表</div>
     </div>
 
 
-    <div id="recordBill" class="tabContent">
+    <div id="pay" class="tabContent">
 
-        <ul id="list">
+        <ul class="list">
 
             <li>
                 <span class="field">消费金额：</span>
-                <input type="text" value="" id="money"/>
-                &nbsp;&nbsp;<span class="noticeMesg" id="moneyMesg"></span>
+                <input type="text" value="" id="payMoney" />
+                &nbsp;&nbsp;<span class="noticeMesg" id="payMoneyMesg"></span>
             </li>
-
 
             <li>
                 <span class="field">消费所属：</span>
-                &nbsp;<select class="input" id="consumer">
+                &nbsp;<select class="input" id="payPeople">
                     <option value="">--请选择--</option>
 
                     #foreach($consumer in $consumerList)
@@ -309,13 +377,12 @@
                     #end
 
                 </select>
-                &nbsp;&nbsp;<span class="noticeMesg" id="consumerMesg"></span>
+                &nbsp;&nbsp;<span class="noticeMesg" id="payPeopleMesg"></span>
             </li>
 
-
-            <li id="consumeTypeArea">
+            <li id="payTypeArea">
                 <span class="field">所属类型：</span>
-                &nbsp;<select class="input consumeTypeSelectOption" id="consumeType">
+                &nbsp;<select class="input typeSelect payTypeSelect" name="payTypeSelect" id="payType">
                     <option value="">--请选择--</option>
 
                     #foreach($consumeType in $consumeTypeList)
@@ -323,27 +390,81 @@
                     #end
 
                 </select>
-                &nbsp;&nbsp;<span class="noticeMesg" id="consumeTypeMesg"></span>
+                &nbsp;&nbsp;<span class="noticeMesg" id="payTypeMesg"></span>
 
             </li>
 
-
             <li>
                 <span class="field">消费日期：</span>
-                <input type="text" value="" class="form_datetime" id="dateTime" readonly="readonly"
+                <input type="text" value="" class="form_datetime" id="payDateTime" readonly="readonly"
                        style="width: 180px; height: 30px; font-size: large; background: white; margin-left: 15px; border: 1px solid grey; cursor:pointer;">
             </li>
 
             <li>
                 <span class="field">备注说明：</span>
-                <textarea id="todo"></textarea>
+                <textarea id="payTodo" class="todo"></textarea>
             </li>
         </ul>
 
+        <div class="submit">添 加</div>
+
+    </div>
 
 
 
-        <div id="submit">添 加</div>
+    <div id="income" class="tabContent">
+
+        <ul class="list">
+
+            <li>
+                <span class="field">收入金额：</span>
+                <input type="text" value="" id="incomeMoney"/>
+                &nbsp;&nbsp;<span class="noticeMesg" id="incomeMoneyMesg"></span>
+            </li>
+
+
+            <li>
+                <span class="field">收入来源：</span>
+                &nbsp;<select class="input" id="incomePeople">
+                <option value="">--请选择--</option>
+
+                #foreach($consumer in $consumerList)
+                    <option value="${consumer.getConsumerId()}">${consumer.getConsumerName()}</option>
+                #end
+
+            </select>
+                &nbsp;&nbsp;<span class="noticeMesg" id="imcomePeopleMesg"></span>
+            </li>
+
+
+            <li id="incomeTypeArea">
+                <span class="field">收入类型：</span>
+                &nbsp;<select class="input typeSelect incomeTypeSelect" name="incomeTypeSelect" id="incomeType">
+                <option value="">--请选择--</option>
+
+                #foreach($consumeType in $consumeTypeList)
+                    <option value="${consumeType.getConsumeTypeId()}">${consumeType.getConsumeTypeName()}</option>
+                #end
+
+            </select>
+                &nbsp;&nbsp;<span class="noticeMesg" id="incomeTypeMesg"></span>
+
+            </li>
+
+
+            <li>
+                <span class="field">收入日期：</span>
+                <input type="text" value="" class="form_datetime" id="incomeDateTime" readonly="readonly"
+                       style="width: 180px; height: 30px; font-size: large; background: white; margin-left: 15px; border: 1px solid grey; cursor:pointer;">
+            </li>
+
+            <li>
+                <span class="field">备注说明：</span>
+                <textarea id="incomeTodo" class="todo"></textarea>
+            </li>
+        </ul>
+
+        <div class="submit">添 加</div>
 
     </div>
 
