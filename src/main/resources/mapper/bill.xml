@@ -9,6 +9,7 @@
         amount,
         consumeDate,
         uid,
+        todo,
         addtime
     </sql>
 
@@ -16,5 +17,11 @@
         INSERT INTO admin_bill(consumerId,consumeTypeId,amount,consumeDate,uid,todo,type)
         VALUES (#{consumerId},#{consumeTypeId},#{amount},#{consumeDate},#{uid},#{todo},#{type})
     </insert>
+
+    <select id="selectBill" resultType="com.xjk.project.admin.model.BillModel">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM admin_bill order by consumeDate desc limit #{startPos}, 15
+    </select>
 
 </mapper>

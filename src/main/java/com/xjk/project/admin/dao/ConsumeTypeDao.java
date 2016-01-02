@@ -20,4 +20,7 @@ public interface ConsumeTypeDao {
 
     Boolean delConsumeType(@Param("id") Integer consumeTypeId);
 
+    ArrayList<ConsumeTypeModel> selectTypeByIds(@Param("consumeTypeIdList") ArrayList consumeTypeIdList);
+
+
 }

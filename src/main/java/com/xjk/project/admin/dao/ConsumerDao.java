@@ -1,6 +1,7 @@
 package com.xjk.project.admin.dao;
 
 import com.xjk.project.admin.model.ConsumerModel;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -17,5 +18,5 @@ public interface ConsumerDao {
 
 	ArrayList<ConsumerModel> selectAllConsumer();
 
-	
+	ArrayList<ConsumerModel> selectConsumerByIds(@Param("consumerIdList") ArrayList consumerIdList);
 }

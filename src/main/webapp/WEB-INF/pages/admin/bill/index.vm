@@ -283,14 +283,7 @@
             width: 100%;
         }
 
-        #billList {
-
-            background: blue;
-            height: 200px;
-            display: none;
-        }
-
-        #income {
+        #billList,#income {
             display: none;
         }
 
@@ -341,6 +334,25 @@
             margin-left:15px;
             width:180px;
             border:1px solid grey;
+        }
+
+        .Tlist{
+
+            width:90%;
+        }
+
+        .Ttr{
+            height: 30px;
+
+        }
+
+        .Tdate, .Tconsumer, .Ttype, .Tamount,th{
+            width: 15%;
+            text-align: center;
+        }
+
+        .Ttodo{
+            width: 40%;
         }
     </style>
 
@@ -470,6 +482,38 @@
 
 
     <div class="tabContent" id="billList">
+
+        <div id="list">
+            <table class="Tlist">
+                <tbody>
+                <tr class="Ttr">
+                    <th class="Tdate">日期</th>
+                    <th class="Tconsumer">消费人</th>
+                    <th class="Ttype">类型</th>
+                    <th calss="Tamount">金额</th>
+                    <th>备注</th>
+                </tr>
+
+                #foreach($bill in $billList)
+
+                <tr class="Ttr">
+                    <td class="Tdate">${bill.getConsumeDate()}</td>
+                    <td class="Tconsumer">${bill.getConsumerName()}</td>
+                    <td class="Ttype">${bill.getConsumeTypeName()}</td>
+                    <td class="Tamount">${bill.getAmount()}</td>
+                    <td class="Ttodo">${bill.getTodo()}</td>
+                </tr>
+
+                #end
+
+                </tbody></table>
+        </div>
+
+        <div id="page">
+
+        </div>
+
+
 
 
     </div>

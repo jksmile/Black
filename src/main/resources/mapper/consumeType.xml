@@ -15,9 +15,21 @@
         where status = 0
     </select>
 
+    <select id="selectTypeByIds" parameterType="List" resultType="com.xjk.project.admin.model.ConsumeTypeModel">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM admin_consume_type
+        WHERE id IN
+        <foreach collection="consumeTypeIdList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
     <delete id="delConsumeType">
 
         UPDATE admin_consume_type SET status = 1 where id = #{id}
     </delete>
+
+
 
 </mapper>

@@ -2,6 +2,7 @@ package com.xjk.project.admin.controller;
 
 import com.xjk.project.admin.constant.SessionConstant;
 import com.xjk.project.admin.model.BillModel;
+import com.xjk.project.admin.model.BillResult;
 import com.xjk.project.admin.model.ConsumeTypeModel;
 import com.xjk.project.admin.model.ConsumerModel;
 import com.xjk.project.admin.service.BillService;
@@ -46,6 +47,10 @@ public class BillController {
         ArrayList<ConsumeTypeModel> consumeTypeList = consumeService.getConsumeTypeByPid(0);
 
         model.addAttribute("consumeTypeList",consumeTypeList);
+
+        ArrayList<BillResult> billListResult = billService.getBillList(0);
+
+        model.addAttribute("billList",billListResult);
 
         return new ModelAndView(BILL_ADD_PAGE);
     }
