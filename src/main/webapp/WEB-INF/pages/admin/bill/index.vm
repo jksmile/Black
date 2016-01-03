@@ -182,8 +182,6 @@
 
                 var todo=$("#"+idName+"Todo").val();
 
-                alert(amount+"-"+consumeTypeId+"-"+consumerId+"-"+dateTime+"-"+todo+"-"+type);
-
                 $.post("/admin/bill/add",{"amount":amount,"consumeTypeId":consumeTypeId,"consumerId":consumerId,"consumeDate":dateTime,"todo":todo,"type":type},function(data){
 
                     if(data==1){
@@ -351,9 +349,12 @@
             width:90%;
         }
 
+        .Ttitle{
+            border-bottom: 1px solid black;
+        }
+
         .Ttr{
             height: 30px;
-
         }
 
         .Tdate, .Tconsumer, .Ttype, .Tamount,th{

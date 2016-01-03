@@ -3,7 +3,7 @@
 <div id="list">
     <table class="Tlist">
         <tbody>
-        <tr class="Ttr">
+        <tr class="Ttr Ttile">
             <th class="Tdate">日期</th>
             <th class="Tconsumer">消费人</th>
             <th class="Ttype">类型</th>
