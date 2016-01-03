@@ -1,5 +1,7 @@
 package com.xjk.project.admin.model;
 
+import java.util.Date;
+
 /**
  * @author Jinkai.Xu
  * @Datetime 16/1/1 下午10:52
@@ -12,7 +14,7 @@ public class BillModel {
 
     private double amount;
 
-    private String consumeDate;
+    private Date consumeDate;
 
     private int uid;
 
@@ -44,11 +46,11 @@ public class BillModel {
         this.amount = amount;
     }
 
-    public String getConsumeDate() {
+    public Date getConsumeDate() {
         return consumeDate;
     }
 
-    public void setConsumeDate(String consumeDate) {
+    public void setConsumeDate(Date consumeDate) {
         this.consumeDate = consumeDate;
     }
 
@@ -82,7 +84,7 @@ public class BillModel {
                 "consumerId=" + consumerId +
                 ", consumeTypeId=" + consumeTypeId +
                 ", amount=" + amount +
-                ", consumeDate='" + consumeDate + '\'' +
+                ", consumeDate=" + consumeDate +
                 ", uid=" + uid +
                 ", type=" + type +
                 ", todo='" + todo + '\'' +

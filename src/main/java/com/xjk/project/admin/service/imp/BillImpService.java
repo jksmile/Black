@@ -12,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -49,6 +50,10 @@ public class BillImpService implements BillService {
             BillResult billResult = new BillResult();
 
             BeanUtils.copyProperties(bill, billResult);
+
+            String date = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(bill.getConsumeDate());
+
+            billResult.setConsumeDate(date);
 
             billListResult.add(billResult);
         }

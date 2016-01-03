@@ -1,0 +1,27 @@
+
+
+<div id="list">
+    <table class="Tlist">
+        <tbody>
+        <tr class="Ttr">
+            <th class="Tdate">日期</th>
+            <th class="Tconsumer">消费人</th>
+            <th class="Ttype">类型</th>
+            <th calss="Tamount">金额</th>
+            <th>备注</th>
+        </tr>
+
+        #foreach($bill in $billList)
+
+        <tr class="Ttr">
+            <td class="Tdate">${bill.getConsumeDate()}</td>
+            <td class="Tconsumer">${bill.getConsumerName()}</td>
+            <td class="Ttype">${bill.getConsumeTypeName()}</td>
+            <td class="Tamount">${bill.getAmount()}</td>
+            <td class="Ttodo">${bill.getTodo()}</td>
+        </tr>
+
+        #end
+
+        </tbody></table>
+</div>

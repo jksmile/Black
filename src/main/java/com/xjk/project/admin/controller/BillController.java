@@ -30,6 +30,8 @@ public class BillController {
 
     private static final String BILL_ADD_PAGE = CommonProperty.getIntance().getAdminTemplate().getProperty("ADMIN_BILL_ADD_INDEX");
 
+    private static final String ADMIN_BILL_LIST = CommonProperty.getIntance().getAdminTemplate().getProperty("ADMIN_BILL_LIST");
+
     @Autowired
     private ConsumeService consumeService;
 
@@ -48,9 +50,9 @@ public class BillController {
 
         model.addAttribute("consumeTypeList",consumeTypeList);
 
-        ArrayList<BillResult> billListResult = billService.getBillList(0);
-
-        model.addAttribute("billList",billListResult);
+//        ArrayList<BillResult> billListResult = billService.getBillList(0);
+//
+//        model.addAttribute("billList",billListResult);
 
         return new ModelAndView(BILL_ADD_PAGE);
     }
@@ -74,6 +76,16 @@ public class BillController {
     }
 
 
+    @RequestMapping("/billlist")
+    public Object billList(HttpServletRequest request, Model model){
+
+        ArrayList<BillResult> billListResult = billService.getBillList(0);
+
+        model.addAttribute("billList",billListResult);
+
+        return new ModelAndView(ADMIN_BILL_LIST);
+
+    }
 
 
 }

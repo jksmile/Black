@@ -34,6 +34,16 @@
 
                 $("#" + idName).css("display", "block");
 
+                if(idName == "billList"){
+
+                    $("#"+idName).children("#list").remove();
+
+                    $.post("/admin/bill/billlist",null,function(data){
+
+                        $("#"+idName).prepend(data);
+                    });
+                }
+
             });
 
 
@@ -363,8 +373,8 @@
 <div id="container">
 
     <div class="settingTitle">
-        <div class="item defineItem" name="pay">支 出</div>
-        <div class="item" name="income">收 入</div>
+        <div class="item defineItem" name="pay">记一笔</div>
+        <div class="item" name="income">赚一笔</div>
         <div class="item" name="billList">账单列表</div>
     </div>
 
@@ -483,39 +493,10 @@
 
     <div class="tabContent" id="billList">
 
-        <div id="list">
-            <table class="Tlist">
-                <tbody>
-                <tr class="Ttr">
-                    <th class="Tdate">日期</th>
-                    <th class="Tconsumer">消费人</th>
-                    <th class="Ttype">类型</th>
-                    <th calss="Tamount">金额</th>
-                    <th>备注</th>
-                </tr>
-
-                #foreach($bill in $billList)
-
-                <tr class="Ttr">
-                    <td class="Tdate">${bill.getConsumeDate()}</td>
-                    <td class="Tconsumer">${bill.getConsumerName()}</td>
-                    <td class="Ttype">${bill.getConsumeTypeName()}</td>
-                    <td class="Tamount">${bill.getAmount()}</td>
-                    <td class="Ttodo">${bill.getTodo()}</td>
-                </tr>
-
-                #end
-
-                </tbody></table>
-        </div>
 
         <div id="page">
 
         </div>
-
-
-
-
     </div>
 
 
@@ -524,7 +505,7 @@
 
 <script type="text/javascript">
     $(".form_datetime").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii:ss',
         todayBtn: true,
         autoclose: true
     });
