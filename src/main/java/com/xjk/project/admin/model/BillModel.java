@@ -1,6 +1,6 @@
 package com.xjk.project.admin.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * @author Jinkai.Xu
@@ -14,7 +14,7 @@ public class BillModel {
 
     private double amount;
 
-    private Date consumeDate;
+    private Timestamp consumeDate;
 
     private int uid;
 
@@ -46,11 +46,11 @@ public class BillModel {
         this.amount = amount;
     }
 
-    public Date getConsumeDate() {
+    public Timestamp getConsumeDate() {
         return consumeDate;
     }
 
-    public void setConsumeDate(Date consumeDate) {
+    public void setConsumeDate(Timestamp consumeDate) {
         this.consumeDate = consumeDate;
     }
 

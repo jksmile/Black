@@ -12,8 +12,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author Jinkai.Xu
@@ -45,15 +47,23 @@ public class BillImpService implements BillService {
 
         ArrayList<BillResult> billListResult = new ArrayList<BillResult>();
 
+
         for(BillModel bill:billList){
 
             BillResult billResult = new BillResult();
 
             BeanUtils.copyProperties(bill, billResult);
 
-            String date = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(bill.getConsumeDate());
+            String consumeDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(bill.getConsumeDate());
 
-            billResult.setConsumeDate(date);
+//            Date date = null;
+//            try {
+//                date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(bill.getConsumeDate());
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//
+            billResult.setConsumeDate(consumeDate);
 
             billListResult.add(billResult);
         }
