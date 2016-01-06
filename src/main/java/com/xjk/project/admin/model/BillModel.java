@@ -1,7 +1,5 @@
 package com.xjk.project.admin.model;
 
-import java.sql.Timestamp;
-
 /**
  * @author Jinkai.Xu
  * @Datetime 16/1/1 下午10:52
@@ -14,7 +12,7 @@ public class BillModel {
 
     private double amount;
 
-    private Timestamp consumeDate;
+    private String consumeDate;
 
     private int uid;
 
@@ -46,11 +44,11 @@ public class BillModel {
         this.amount = amount;
     }
 
-    public Timestamp getConsumeDate() {
+    public String getConsumeDate() {
         return consumeDate;
     }
 
-    public void setConsumeDate(Timestamp consumeDate) {
+    public void setConsumeDate(String consumeDate) {
         this.consumeDate = consumeDate;
     }
 

@@ -41,7 +41,7 @@ public class BillImpService implements BillService {
 
 
     @Override
-    public ArrayList<BillResult> getBillList(Integer startPosition) {
+    public ArrayList<BillResult> getBillList(Integer startPosition){
 
         ArrayList<BillModel> billList = billDao.selectBill(startPosition);
 
@@ -54,18 +54,20 @@ public class BillImpService implements BillService {
 
             BeanUtils.copyProperties(bill, billResult);
 
-            String consumeDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(bill.getConsumeDate());
+            try {
 
-//            Date date = null;
-//            try {
-//                date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(bill.getConsumeDate());
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//
-            billResult.setConsumeDate(consumeDate);
+                Date consumeDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(bill.getConsumeDate());
 
-            billListResult.add(billResult);
+                String consumeDateFinal = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(consumeDate);
+
+                billResult.setConsumeDate(consumeDateFinal);
+
+                billListResult.add(billResult);
+
+            } catch (ParseException e) {
+
+                e.printStackTrace();
+            }
         }
 
         ArrayList<Integer> consumerIdList = new ArrayList<Integer>();
